@@ -153,6 +153,12 @@
             $('#post-box').hide()
         }
 
+        function sign_out() {
+            $('mytoken', {path: '/'}).removeCookie;
+            alert('로그아웃!')
+            window.location.href = "/login"
+        }
+
 
     </script>
 </head>
@@ -185,15 +191,19 @@
     <div class="mybtns">
         <button onclick="posting()" type="button" class="btn btn-dark">공유하기</button>
         <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        <button onclick="sign_out()" type="button" class="btn btn-outline-dark">로그아웃</button>
+
     </div>
 </div>
 <div class="mycards">
     <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
 
 
+
     </div>
 </div>
 </div>
+
 </body>
 
 </html>
