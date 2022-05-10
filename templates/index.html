@@ -1,186 +1,199 @@
 <!doctype html>
 <html lang="en">
-    <head>
 
-        <!-- Webpage Title -->
-        <title>Home | SWEETER</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-        <!-- Bulma CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <!-- Font Awesome CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+    <title>A조 9조</title>
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mytitle {
+            width: 100%;
+            height: 300px;
 
 
-        <script>
-            function post() {
-                let comment = $("#textarea-post").val()
-                let today = new Date().toISOString()
-                $.ajax({
-                    type: "POST",
-                    url: "/posting",
-                    data: {
-                        comment_give: comment,
-                        date_give: today
-                    },
-                    success: function (response) {
-                        $("#modal-post").removeClass("is-active")
-                        window.location.reload()
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBQVFBcVFRUYGBcZGRodGhoaGhoaIBwgHRodGhkaHCAbICwjGiAoIBocJDUkKC0vMjIyGiI4PTgxPCwzMi8BCwsLDw4PHBERHTMpIykxMjExMzEvLzExMTExMTExMTExMTExMTExMjExMTExMTExMTExMTExMTExMTExMTExMf/AABEIAMsA+AMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAFAAIDBAYHAf/EAEUQAAIBAgQDBQUDCgUEAQUAAAECEQADBBIhMQVBURMiYXGBBjKRofBCscEHFBcjUlOS0dPxM2Jy0uEVQ7LigiQ0RJOi/8QAGgEAAgMBAQAAAAAAAAAAAAAAAQIAAwQFBv/EAC0RAAICAQMEAQIGAgMAAAAAAAABAhEDBBIhEzFBUWEFcSIjMoGRsdHwFFKh/9oADAMBAAIRAxEAPwDs1KokuyJgj4Uu1HQ1CEtKo+1FN7cdDUIS0qgfEgcj8v50OxHH7abpc9Av+6ioSfZAbS7hilWcPtfZ/YufBf8AdTl9q7R/7dz4L/upulP0DcjQ0qBJ7TWz/wBu58F/3Um9pbY/7dz4L/uqdOfom5B2lWYve2dhN7d34J/vqq35QcMP+3e+Cf76nTn6JuRsaVYe5+UvCrvav/wp/vpn6UcH+6v/AMNv+pU6c/RNyN3SrBn8qOD/AHV/+G3/AFKafyqYP93f/ht/1KnTn6JuRvqVYL9KeDiezv8A8Nv+pS/Sng/3WI/ht/1KnTn6JuRvaVYD9KuD/dYj+G3/AFKb+ljBfusR/Db/AKlTpz9E3I6DSrnv6WcF+6xH8Nv+pXv6WcF+6xH8Nv8AqVOnP0TcjoNKue/pbwX7rEfw2/6lefpcwX7rEfw2/wCpQ6cvQbR0OlXO/wBLuC/dYj+G3/UpfpdwX7rEfw2/6lTpy9EtHRKVc7/S7gv3WI/ht/1KX6XcF+6xH8Nv+pU6cvRNyOiUq51+l3BfusT/AA2/6lL9L2B/dYn+C3/UqdOXoG5HRaVc7/S7gv3WI/gt/wBSlU6cvRNyNjZx6EDXWpkea5/heIEc60OD4qAIJrTPBXKEjP2aEtTc1DW4isb0xcevWqOmxt6CbtQPGWc7hREmp8TxEAb0Du8UKvmB1q3HCXgWckyfiHCskENIOm21WsHw3TWqDcUe4RMach99GsNilyxO1PNzUaYilCyA4IA1I+EB5VYR8xqXLVLlIdUZLimBRZZ5CAEsVAJgbwDQ9uAW7lpruHuLcAzSG7uUDZZ1Bc6aab15+UPgVy5+u7VltBQGUbTOk+B2rJ8L4tiktnsnRVtkkgnR2LblY72kACeQ1qp6icZGhY4yiqPMRZdWMqQQYIPhyqriGDbgA10DCezxvBrjvq5J258zHLXlWL9pMIMPcZXIkdPvroKaZjsC3LZFMVasYEG6WVXVcoU9ZlgPTST6VbRLVi8UuXM0AksNokAMB9r7Rjf3fGq3liixRZTRJ5VYs4fwipEK3GVrTgkznttygEmD00Pwo/wzAC5bzoNNQZ3BG4NGOVSA4tGbaxG1V3ws1qL/AAwztVXE4EjlTWAz5w2moOnSo0srrLRpoCDqfhA66xRF7LCqrkigQr4jCFeanSdKqlOcfP6iiF1QRMDzFNW0pGkg+NQNlALXuSraWzJ0mpFwrHl8PrxoWkHkHi3Ui2av/mnUEVdThvczAqfDmKKBYCazypvZ60YazpDDbY1WuYeKgAcyClU726VGgG4t4qD5edWrOPI50MRI3YemtL84tryzH5fKtLg0Z1mT4XIeHFDFSLi3PI1nzxI/YCr5DWoLmMYzLE/W1I4pDbpPxRe4p7QsrZEgnmZ0/nVnhfEBcUg23ZgCe4CfLw38eelN9nuF2yWuFQxYyJAMAcgOWs0exGJS0yhrltJ2V3AJ8hNcV55qXc6iwQcaYIsY8kOUK5k95TIYddCNxVuxxho1ieooH7T3TbxCXdF7XRjyMbExpqCNfCh35ww0J8/PpW7BmlktSMeXTwh2Ru8LxjX3qvNxfuzmrnVrGQd6L8KPayWPcXeJkk7D66U+RRitzBBO6QV4njpt3HeDbCmQZM+Ec9dPWuf2sO6XLeY5dTcKDl+zPy0/lWm9qeKC3bygCfsjkOlZK3fYy7mXfU+XID7/AFrDj/NyX4NU6hDb5Npgfa25bTKII5SJrMnB3MdjD2r5Vfvs8e6gMZV5ZjKgDqdjBqi2INdB9h8FdODNy2LYuPcZQ7icqLHugbkszc438q1ah7Y2UYoJyoL4fhmGs4YdlbyBToGXvOcpU5jqxkE6nbQ+FCLWAF6y9u7h7ig5stxsh0IIBgEmRGsA67VqL9tVtrbuXFZ9GaAAWjkFHOOQ+HKvF4KhJurfvd+Dq4ZYOsBcuWNemmkRFc5Tauze4LijjftNwG5gnW4gKbTlMgGZMHpOvka1XsZxQHKzHW6qi5pCh1PZ5vUlZ/1DYCttx/g6XsO1s6kIcractY/CuS4BrmGudiwMiRtOgVfjqAfD77sU9yszZY7WdSfCKW12qvxHAqVkDao8LxNWGbqKZj+JrECtyjO0ZupFoDngTuCwH/NZniGDKMQRrW8w3GLYWDOnTWszjMUly7nYd0tJ8pp1u8gtA/h3DluW7qkw6jMo6/UfOhiJAlyVX60HjXT7i2b2UW3XMBoRExzEdNvhWL9osEgzIHBdCJA8fuidarnJ7W13GStozt3G51ZbZyKViBIMzvI8NK9Xh14WwVBVdwxBWdNI69Oe/wAT1n2bKKSCrMsZhppOx3IA8DB02rTY1G7EKltXyrpJBgAcpnWuXPLzwa44v+xnbWAuqF7SMxGYRMQfE85B05USs4SVOg+FF8DZuvatC6iAgEjKNYJ2+Q+IolbwigRXQw5FsRmyQe5mJv4PYQapNYyzIkdDy8a2+J4eOQ1oFjsIenpy9TWiLsqfBksRZ6bdf5V5RHE2teRjmdhXlNQtlJsSSdTXpvxzqjmr3NTOVjKKRbF6vTd6/GqivXnaVNwaNjw3B3r2GAt3TbAdhIYr+yQdN9SdDpV7E4Gw7DtG/WZMpytBIB36g7a+NB/ZPiaheyZoJeVEcoE6+Y28aiT85/OGe3aRAxMs7IFZf9IMn4eorj5YtZGv3OliacDQcQwtq9bt2LZMK0jO28AkoW31AImspxdRbuugkDTuwoiQGg5dJEx6Uew+KW5iEtJKhyMxUxl7pJII1B5Vl7uHuNcuKwJdWPaMxOkGJJPXl15VfpP1Nsq1LVUkeWnZ2VV1ZiFA6kmBW6wfDvzazDOC5OZ+kwIUdYA386CezuERHe5OY2gNdhnYGYH+UAiTzNVfafiF1l0MA6b6maXV5dz2ITFDatzBHHsV2lwgGQNzULXgYBHlVXIU7pGvOvDcrRp8eyP3Kckt0iV9NjXXcBfyYPBYe1oblu3mYcgy9pcbwOrGuNzXWuDg38DhzbI7TsmsjlDrbdD5e7PqKr1f6V9y7S1u5JMfwrCvkuRiGVWLC6EZxJJYsGPeA390ZYAG1TW8URbYW3zIIyEmTHmd58fGsde4FxLE9liBcyM6DuKtxeyA7oAJgKdBoIjx3Oh4BgLtuzdOIuZ3MxoAQBtOXdiZPw5zWacYqN3Zsi5euDTcIxQuWyrnWDMH5is9xDg9k3BFoG4iZu0DHMQwAJyzlY6tuDEeIqxgGi3cyk+6w9WGVfmRQrivtAuFN23bRWuoijtGAnM6g5SAO8VXKxJPMCkhGUpVEWThFbpAFuIsrlGOxIkeB1pPi82xmgSXRDZgS2mUz8SRHe+IqW2ndzhhIMAHRj4wJgecetduMqVM4c4pu48BM3o3qm7mfAV4HJHeIjXbSPP40R4Vwi5iSQmw0ZiIVfEnrtoJJmjKcIx3SdIrj1LpK/sC85B0PjTkQuwESW5cyDWrT2Yt2wS+a7rA+yPMwZ+dWfzPKhyoADGyxtOk7n/iuLn+sYI3GKv+juab6VlnUpNL+wfjhet28lxgbYWCYIeYiCdiJ5/3qHDcTVSBMpG/QgbHrtV57/aDKx8G6xH41mz7Pt2jC1dKqNSmhIP3Rv8ACs0HGaTvg0ZozjNxrk2PAcTde5c7SVVYypmtkSdS3d12PM8tBWgj6H8zWR4dirigI7sxXaVAIFGRxQRqR6mfkK62LC1BUcrJmW52Fgo/4H4mhfGrakDaeg/E1Uu8SP8AfuihmJ4jP+YeGg9Tzq+GNp2UyyJqi1xDgSi0HBzMACV2UT/elQm/xVyuQuWQR3BtptJ50qbkF/BiA9IPUGelniiWljNTS1QZjXtKQnS5BBB1FG/z/ENbFxLecJK51AYqSJ15jQz0rOwa0XAL93D2btzIxS6oVRMaie/sdACdY69Koz498bS5LccnF/AzgvETZzXWANxtEU6CTpr0WYJPhU/bMz3Uli5ukOTHeIVUUz55yPOq+Adb63GukkjItsgQAuobnCge8Bz11pjYybheJtsxA1nMF1J2EeQ39KTTuOKVyVtDZW5RpOvBLwviXZ3mDt+qcgv0UmShPhrBpvtFcV7i5W0EeVBuJP3iYAy6adNvhp86bw+2swGzMToIMRG4J2PL+1DPgTybkwQyPbTLd4ZmLdTp5f2pnYmPXTl9b1oMNgA3l0P1rVr/AKTpymdOkkc4G8Rr4Vo3JFdcmXFgZGbOoYMITKxYjm05coUT1k9K1v5NeLi3e/N7jQl1g1sye7cAiPAMvd8wOtC8Vw3KJ16nlOuw6H65UIupGolWnuwfdg7zuNIg9aE4qcWmCM3CVo7Nxfh5d2ZsS6LuVB0A8+QoTicVbKdjaY3GPdLctwWC+g1PgK8xnDle2lxmID27bN3juyg68iJqmQlpG7OCxXeRoJ1jpXLr5OlvkH+GospbBksQTHMIwB1/1EVzD2iLHE3VMT2jneZLMTOhOsZVjkFG2w3vs9iiGRj9kx/8T9fIVz3iWEKXbqsDKXHB2B95o+IE9fjWrRxubMetltgioFEiJ8efw9KkSNdtpnepQkH9rQ8/CZ205aeFe2MK11wi6sx01HXfXlE+XpXS4RytzbJ+FcPa/cW2sxGZ2XdVBGdtdtDGvMiuhpxG3atratLltroFG5PNmP2idyec0J4Nh7OHCM1yChzXgwjtCI7ML/kEkidJYN0gXi+IfrGIgCZmdB5VwPqmTfSjLj1/k9H9J06tuce3n/Bq8OXcyzRJ90b+GlTXsOwUyzHwAEb1nrfFkdVtrLsI7wBbUCDqBrUqcYeclvNcPwUeGYwCfCvPSxTvhHZad8D8fwXtJZDkcfXLbyoM2GNpbffObOwLjTVgApHgGgeMmtHcxDi2+eAwQkgR3dNAY+0enmaClyUVYLSwXSDHPNrtrWnBOVUN+r8TH3rguYdrjAC5aiYAMgkCR4HMD4a9aG/9TEbn0gfdUmPvi2t1eTpI8ydR6H7qzRu16T6bllLE0/DPN/U8EI5rXlBlsf4epOb76q4jFs25oab20U1rldByZhUIrwTtiDSqk70qQcpFtKNpw2zbCdu5WSAxzMI0UsFVbblioYAkkDNIGxNAjsYrT3OyvZrgztlNxlVM05nZri23Xs2AOZspYNBXWpIKIG4baQEPmLAOxAcKYtz2mQZGU5IIlmGZkYACAae3AkOilzkYC4ZU5+/ctMLawIY3UVVBLf4qk86sG5abPdEusXFOUXDKNda6yFezi27ByhYvlAJInaqAvkWDcJ/WubxQZXBLXjaDG2csAZFfYz3xS2w8F1OBWWaELMMiFj2gKjMGPdKWjmHcMO2RdVG50q8QfNNvPKrBfWFAIEIIOpmPhVm4BbUdnLrbAOW4CSJ1AhratbBuDNlLkSNJqrhbRFu66nMtoKX0nOXfJz5e9O23jRlljjhb8kjG5W+w51ZbZGyEBssDvfYJMH3dWA5Rm/aqrcxOWYnKohRG0wIHpNdA9peE3MRhzltlWw5C2o07W3kTMqjqG208t65hdc+5J3lusgR9eVY9LqoyUpefX9En+J0hYnW2GP2tuhhmGn8MelMwRIZSOoq3iUnD2m/zXFPTRswHwb5ioMDHaIOrL99XSd19hqo6bh8KB0+H10q4bS9PlVm1hSSFUSZ0A+tfOjCcAuwJKrr+0dPgKlimVxmCDToDP0PPyoVg/Y+9iSxUKlsE5rjDuxGwA98+AgdSK6pheEW194do3UjTTaF/nNEWAKlCO6QQRtoREDpQc2lwHan3MhxBFS0tvlkCz4KsA+FZYrkXw+tK3PGuGu9uFZWgRr3TP3Cs3/0a52ZUKMx551/nWPFGST3I1znF1TIOEOIj68qOLwCxild7qww7oupCuxAiZiDAhdRuD0ofw/gVwGWYERqEn/yMAH41oreHMKO1VAogKNYp8cXGW5OirLKM4bWrMNxj2HvKWazku2zsB3XA05MYbbcH0qHh+E7ABXGW625IiA2oQ/snYk8yI5V0pQn7wE9Sa9vYW1c/xBaf/UFb/wAhpT6nqZsexSor0sceHJvav18HPOKotss+fvGO8eWkZYGg0J+NY263auEQBQW0AMDXx2Art3EeCYe+mV0U9ChCsOUgj7jIrmWP9nWwWJYHvWyJtuR7wO4PLMNv71y54J4U5Tdv2d/SamGT8uKr4JLWGW2MjoyA/ZDHI0c4AWf/AOqKYa6qAZCludAcq5uvdPWgOJzBWZAWgTkQMW+CkT5wRQHFm5Be6pLSmQhlK2xnUkRIYMdiY1rJHA8rty4Ls01BdrZtuIYhRbZRzgSepIJJnViY3oFfxWRQc3umSAYmJ0NVuIYotdaJYW1gLGrO+4gbkAAc/eqiDbIK3HcSZMA6MNCsQYAIOkfOrMOmcUrf+sHXXKSv7el5POI3C9vtIiWAj0MyfMD40LL6+vyorxY21tIiliDcYydMwVFA+yObNp9EKGB869DpIbMaX9Hntbl6mVtXXzwToGYwBJg9OWvPwFRFh6U1mH96Y3w8K0mREhuUqiL15QHshzGtNxEm09pLIDwzZSyZgptvl0GynMrOx372pgCsyjxR+zfcqRcuKhuCHbRfeUBs0uAzZGEkLpI1mgwonvMxcqq+6lzI0GVbtGtWgjfZYsFJjcs0zycuKDFm1ID3MpEd3s27rINiSl9UU7AhTstVTefKczAN3mJVQCNO+wUv7wBOZlAOrakzTEskW+yBBA985NQCxzZSDJ79kACASco50owT7Qkg3UIVVRmQg9xFJzFQ4yspUjvhg0CNa0GKwmS82IjJh8Uly1eEQLTQUD/6C4BU+J6igWDm5etoxDAtbzSukyTBBcoWhT7qnaZE157W37nbvbW4wttbQMs6ZQxKqAOWZZ+PKsWoxSyTjGL939iVUXIhxfHbr3zfS43c0tyYyoAF0U7BjqQeonagZdrjszkl2YktzMnUnrvNeX3AAQDUnfwgTI6VKlxoEKhMiNFPM7jn61qWOCqMV2QkOHfsnxFvJhlWcwa5nBnbRkII8coOm0Heh1pu8I3BB+f/AB8qvYh7ly3BBIWNgO7qeQGnP76v+xfDzcx9lGEqjl36QgLAH/5AfOklGi+VeE/3O54CwLSTE3CNT56xUr4lz9pF+ZqjjMZbT35M8pqi/FLh0t2woiZ0EDqSdvlSq2I2gyxubm5A+FVrrAam6T8f7UBsYrtQH7QEHmoMDwLtz6gBiOYFXbFsA5hbZ2/aeQB6HfzgUWqByWfz+2D77H1H4TTvz1T7tp28lY/cKej3DuyqOgp0+LE+JP4UthorE3G//HePFgvyzTUOIxD21ZjZhVBJJaQABqTDbCiSgdBXt97YRs4GTKc2nKNdOelRS+CNALDcYVkRntAhhIKEkGNypO4qzb4hhm3Dj1H4xVP2Zw+ELPctpDKxyBmJa2rDVRqQoLBjoT8RRXH4S2wkoD4gCfn/ADFPLanVCpSo8U2DGS4VadAZE+Hj6U3G4cYi21p9Dujb5W5HyOxHQ0Cx+FtjLlld5gnfkCG1UiNjrVrAY4ghWYsR138j1+FLkxKUfaDjyyhNNcNGOYFLhRxlZGhhOoI/ZI19RVjGXBcQgzcj7LqlyPGdHPnNGPbO2M6XAuYXFIIGhJWJynacpBg75TWawmDW4c1q4xZfsxDL5gt8wI0rgTxOE/senx5Y5cal7ILF1FP5wEBKZmKwYLEZQ28ySR86DqSbaEmSS5JjnnM1qeKYS61i4TbVAFLXDGXMV1AidevdrK4bvIAN5+8D8ZrXi/FglL5X8GeE9urUfh/2SY9Zsqw3V48sy/8ArQdvx+ulariWEC4NuZzWz48x+JrKujQTGh110G/966f0+e7Dx4bOT9Tjt1D+Uhr/AB+ufrTCPranl4kdQPuqONoM6f338K2mBDKVNNKoMNYzRi+Uc5i+gLsADbOYFi6iC4dW1yxl5dKDTRBrvZlQse9zLAHK2WTlImWB35RSsdF0uhYuXEEONGQyGcuxUBs+YqxEFRBMk1CuJOQ3MwDk3SFDCQXZIhZkgd9pI0id6Zng5V0gOefI5VkLoZI10PvU7Op32UtGkhchIBjn3WWI3IWaUIf9k7E30ytnVLZMyg0AIGqvmK5jADL8Ki9pTF3NEmCJjzI+En40V4LeFqwrRD3QC3XL9gE89DQr2kxCNcGum5PkJj8PWsiyfnprwXOH5bTM8gzEt1Maev4zVvD4hkYBBIHeEwJGknqfwg0zC4duzYEhQ0anQd0ZjynZxtvNV7V/LtO4PlGugMj4ir78fyU15L2G4g2UhttNNPCDExsIrXfk/de3xVxdoSNvtT/t2rIO9xgpLFpBPLTlrG8Dnp71aH2QvC3fvKTBa3a33YiZ8CYJ+hUbW1RQ8r7s3F7Gd4ONSA0TyMbx9c6t4Ru7JO/r6+Z6n5Vmrt8jXzBq3h8dNtddhHw0pXHgrT5D6Oi+6APranHFDr86yfFeKlE7vvMYE/MxVPCcSuJc7O4SZHQaHQjUcuXnSOST5NMMEpx3R/jyzbfnQG7CkmPTqT5A1nbuMhWI5KfuNDfZ3H3Gz53c6L7zE9Z3qVToWONuEpX2Nucb0Rj5wo+JqJ8W7DL+qAO4LF/ugVmuLcWNu2cphm0Xw6n0HzIqhh7GJtomJW4pQmXQsxaAC5BUiCcilhrOh5jUN06osx6dyhucq9fJrcNba2MqOEXkFRQB4CSdPDSo3xV9doujmMuVvQjQ0NvY6Ofw/wCKqX8SCJIUx1APp4fKra9mRsn4lisxEGefluCCORGgI86fZIIzcxvHLoT1HXSgSXRmbXcyAdco0EA7kSNJ6mrljEurArv9ddDViXBTfNk/tNirj4dgqwbN233pBnMIJUfsjOus/hOWw1xbrAs2W4J1IVR6PIBNa+3btXCVu2tWEQH0GoMiDK6qvXYdKyVvFsrlcxBkyzASCNGVx+0I3G/zrPqIxliaUVa8m3S5JQmuXT/3sWcZiri2XUsxDQASVOn2hPlPyqhwW3+sCMCJBPLSB/KruKso9sfrHZpEwDEHeZAmCAd+VVsHh8rqAQMoOs5lMDU8hB69fnTpdOp6aUY93f8APgOp1Tx6uM32Vfx5L/tB/wDbMNP8ROfTN05Vk2UjRO9Ogjc7kHfetDiLua247QFgFYAKPezhTBG0A8/Cs8wg5l21mRroImAT5zWrSaaWnx7J97vgo1mojnyucbr5K7jYHT65nnULk7ECfMfXOrfaLMqkDkJkgxqdfrXnVN9/51pZREYaVOQLDTuNqVAciir9q+x8C3MGN9zqYB1n1mKoVYyyQZ0knaZ1n100igxiyl9oHIyTo2x3JAJ0Os8xUnDrJdrduNCSCQToCZaOnuR/eqqjUE/5uU7nf/NodqMezywDdPiBy3Mnz/5qrJLbFseEd0kgxxW4AvSIiPhFZt7hLFvDeeXPz05Va4nis0jmf71RtanT9n9nxP4RrVGKHlluSfNIgD6ZTqAd+Y5H4wPhUma1BiZjQ7/H0qBjy2J38TOk+n31IlsSM0jy++r0iqyVHIaR3u7BJPd8vh99E0eFLkakKo12CydPUn4VSw9sSqA6k+cdSeVGsZYRlA2y6KRHLkev/JoySsG7iiunGbg0MOBtMz8Rv60T4Vj2dSxXKCTl1nQbnbrp6VnnwbjYqfiPlrRLhaMqEEyAR5KTOk/E1GuBSzxLG/rE/ZUAx6n+VPx2NA12cgRyI3gnpvSa2g/WHUgaeH1NXvZnAW8ViUtXTlS4TIGhaFJyTymN/wAayv8AMbXhf+naUlo4RcuZNcfCfk0XstwpMTaN24WFoKc7yLaaCGClgWaNdYUeNDsVxPBgvbwVnuiA112di2/uKx0Hifhzqf264vc7R8Gii3YtBVCDTMcoIJjTKARA8J8sZYRrYYZhLREct9T8atSbaZzbjTVnvEsaXuad5V084PePqfwrbYngd9uHpigB/h3bzLJlVOHuLay6d49+SNNx0rD4NOznWSdOmldX9h/au3ctphbpC3FXKk7Oo0A/1RpB3io4tKx5Zo3GMfBh/Zfh17F25t6rbXvM0xpso0JYkAaCo/zhgIKBh1k/zNbDi/HrHC2bCYO0qsWNxyZKKzxoBMzAGkgAEVz+5Gp0kmdKeLb7mXJTk2hxYdpIkHKRE8p/A1YF8dfxoDiMWQ48I16+FWlvAgMNj9EVYnzRWkmuA1g8eFPd36nbw8T8qZxmypm8u5I7QenvecR9ChBuQRH0KJWMXyOxgbSNBFV5IKSLcc3B2ilh8RlIjaq+NCqQykgMQTBiCBqu2x31/CmYtOzfKPcOq+A6elV2u8jrz9R48v8Ams+BPFO/Bo1CWaHyuxP2SMWUGMw7p213HLaRQdlEQdpIM8iPXy3qyr93vDvTOwiIPSquKcFmjbWPPrHOfxrqZJXyc9ckRiNvw9PxpgfT69K9YA8jNeM5IEkkDQeE6xVY6IzSrxqVAahU5Nx59Y+fKm05Nx59JoBJcJaLvbRd2Mb/AD8I1NHcfeW2OzTZNB6bk+tP9mcGFXtWGrSEBjb7TdddvTxodxx0N05BA1J5yT0n1+NZ5fjnt8Iuj+CN+ykXkyeh5+f1HP1qWy8H06/UeVVlP3HkPH6mpA/3dB9etXVSKbJnC5pOug0n5nwp6y5JJ3qtOtWrLxUCX8BZCktz5etTXX1MdahS5ArwvS0QkzUdt2wuHI+0SGP4D4a+tZ9H15aUROOUhs0numI6xA9JpkhWw57K8CGLd1ZwiW1VmJ5DMJI5TlVhroJnlWnXDcPxbBME4sYiyR2bEQHymQ0H39Z197wIrnmF4u9u1dtoYF3IHIOuVCxy+RJE+AjnVX85gggwR4x6zSbGxt507294LcuWVxXZ5bqLlvKDIIH21PMA898p1iIrmgOs1qeC/lGv2gLd4LfTbvGHiP2tQwj9oE+NZrjGJw7XC2GzrbbXs3ABtk7qCCQy9Dy2owTXDEnJeCJoO9WuFYN7163btBy5ddVB7us5ifsgbz4UMbERXbfY3A27OGSJQOqMzge8SgPebWBrp7ulGb2oELkzmPtJjrd3FXbid8O5IIDAad0DvgGYE7c4E0IZwBtHrW4/KhgsPlTE2mGdrmRwNMwKsyttLHuxOu9c57cRFCNNBdplbEtrrrqY+NLB4vKYOx+XjVa886E1ESdvr0pmhI8B7OOde28WVnnQ3DX9IPp5VKXG5nWoW2W8Vc7RMsDMDI1+I1+tKFFo0Mg6yJ2q1245afXSoMXDd4bjfx8aXaHdRHduxpP1EVA5NeM2lNzVaV0OZvr6NMFezXhNQZIbSr2lUCKkDSpVCGuuX8rBRELZRQNpkcvh5VlCTOu/PeieC4vkUB1kgQG5xGg1obiLgZ2YCJMx99UY4OLdluSSklQ0GvZplKryokU1Oj1WnSnBqFELy3/u+hSF2tA/srb7F7lu9dcrbsuqGzbUsb1prqLPbdFAMAmToDRdPybvnKHEqAHtgsbcdxgwdgM+pW4pSOehkbUu6JKZihcgb1I12NJkddfhRSx7N58KcT2oAFxreSBoQyKHZiwCp39WI0OUazpNa9ldLrPcaLdqzdlUUhzdthyqlrig5ZiQST05UbQKZev+2Ftkwq9m6nDtZLQyxd7JVBz6TPdOXkMzSJ1p2G9pbK20RLV11s3HvAM6gGQSubKY7rsDOUmB501vYR0bvF2m1bIW2i5u0fOGty9xRCG3qxOuZQBJrxvYjKt1nvOBaZ1/wlGcKbcMC9xRB7Xqfd50v4SPcSn2vsE6WboD5gba3RkBuFzcuxAzP+sZRmBEImoih/Gvaa3ew4sIlxcjJlJYQyrbS2MwBAzd2dtydaCfmFxLFvFs2W2z5QykFpBbMAuneAUmCRoya60dxnsgidqRfuMtrtJPYCP1VpLz5iLsIStwBZ95gRoNaNRROWZhrn0a2/st+Uq9hbYtXLQvIogHNkYKNAD3SDA0B6ACqNr2PsteeyuJuZlu2bUmwgWbyNcB/wAaYCo3rHjVnCewBuJnTEwpMEFFzCbqWlnLdKlTLGQdMkHepKUX3AoyXYEe1XtIcZdnIqIvuKjMd4JZmYAsY0iBHKgTvHnWxsewVx0tsb65WawuiBgFurbd3Vg0OFe6i/5pJ02ofj/Y5rV21aa+pa5bv3CYAVOyR3ALFohlUEtplzc4qKUapE2vuzLMSTqKRjTn5/WmlbW/7ELaIz32Ii3JFgMkXLq2BDG5BuB2DZf2RM8q8T2KS4SyXrmUPdVv1KLkFsXY9++JzG0QDJXXVhBFTdEO1mKL9OVTi8SNZH1qa1yewQLkLis1sIHFxba5X/x5VS1wJI7DfNHf3gScpxfBdhfu2c+fsrjpmylZKsRsdtup9aKkn2JTRCXrzOaiJrwmjQRzc6ZSmlRFFSpUqgwqVKlUIeSK9BrT9so3gefYj+de9rbO+Q//AKz+FPs+Snq/Bl6VaU2rLbonplH/AItUb8HtN7pZfmPn/Op034Is0fJnqVFL3A3HuFX+R+f86pXMOyGHBHT650HFlinGXZkSgnanKux5c69PTmNj1rzPz671KIW7WOupKrduKCAO7cZdAIUGDqANAOVNOLuEKc791pHebQyTmGujSSZGsknnVU9Oh0pFhPLXxoBLLYl9RnaDOmaBDRmkDSDAkc4HSpE4peAUC9dAy5QBdcCOgGbQbabVc4XxW1btqrzKl4yrEFlcBn/WDPGYRAUiB3tBUq8YshSpzGUdCMikBmdz2wLOWLZXCxM933tqH7DUC/z26NRcuA6yQ7D3ozTruxGvUjWpLPFryAhL1xQVy+83u6wo17oE6RtNScQxllraBCwe3A1RQH7ltQzEMY1RjBn3qJXeO4diQtsoTIVgqEopViCBOrC5cuHcd0rrIAofsBoAtdJ7uaQROUnQEiCQJiYA18qlxGOuuMru0EKGGY98D3S4+2R1M0Xucfw7qyG2VUq4LBVY5mF0Z8uYKpm4rSNdCNoNVb/EbXZogl8ht6MqqAELZyCGJ74IkeHOpfwCgcuNuA5hcaZB99pkCFYmdxJg8pr1uI3SZN65mmCe0c853zdQD6UUbilksWYvcKuzrNtNmUgWzDwoUwZ1Gp06+XuNo+I7QAIkXAJXO8MxYfaWCJgQe6NNan7BBQxd0RFy53RlEO2g0hRroJVdP8o6VGl8iBmaBIgMRAb3gOkyZHOaNpxqyQVdbjKUe2ASpKo9x2zc5cL2YG3unWKmfjViWzKzZ1uBTkQFBcyhVAzGQmViNRvGlD9iUAbmNuHTtHKhswBdjBiA2/vAaT4V7+e3YC9o8AkgZ2iWkMYmJIJnrJnejVvjWHQW17HObYhXIQHVFRiVk5pVSQCe6YOtZoHSivsGizbxdxQFW44UZoXMcozAq0DYSCQfOo3uFiWYlmO5JJJ8yd6ZSogEKVKlRIKlSpVCCpUqVQgqVKlQIGO2K8yv8FsfCCaS4omNTr43D90fQqncOUKRoSN+fKvQJXWT3up8KssqSLoxJ8d4+3+Jp6Yg67yPD/1/GhzAd7QfAdK8Dkztt0FFNiuKDSYvfXapxfVtCAR0OvyNAw5013H4VLYbRfWmUhJY13LuI4XbfVCUPxH8xQnE4C5bksvd/aGo/wCPWi9g6Dyq5bc9aOxMXquDp8mSrqnsBcsDh4xN23bP5reuIcyqcwum1lmRrGdt+lYPjuHRSGVQCZ2/ltQgbVmnG+DXB2rO5nAW7V+7h7drMbOCRlNq1auXC1y+5OVbgyscoX3uU1Sw2HxJVCmGDFsdlxAvWLAYWeztz2gUZbYy690/fXGW51GHOupqvpv2PZ3XhvD+HvcwSKqArcxb2GhStxEv3Ea2dO8MjKy/6KG8Ww7jB4cWsNcuK2HslglnDm05Ld9blx/1iMV0JXaR41x9NxTc560em/YNx3W1hnvYnDXHW5btdu6rhcRYspB/Nr0dkyCXQeM8jyoPheFG4+AuY61at4i2b96+MqW5s2hmRrqoMoGcqNRsT41yVsQ7e87NBgSSYHQTtXjbnyH3VOm/YbOyX0w/aO72rdy2lgcRtG0FyF7adnetAwMyF8rweprG+yePe6OJ9oEPaYLE3SAiCHGUDKYlQA7AAGNulY5D+NI7fH8KihwDdydO46t1uEXTiUuLdtth8pv2rVoAs2V1w5tgFxB1zfZmrfsxwgrgbdt7Si9ds47s1ZVzvKobZWdTpqK5L+cOxys7MBsCSY8p2p5vM0ksSV93U92No6elDbwGzrC8Dc8NOHFj/wCqGCSbeRe0BbEEgkbglQd+hoVjbotcPa9csC3jVIwDFlWFGXtu1K7Z+zhc28ma57ccliSSS25JJJ9TrSn7qKgLuIsteVYt6761C2/qataoCZ5SpGkagTylXoq5h7YkafZ/GolYG6KioT605bTHlzitBYw6ad0aCrNu0OlWKBRLNXgzP5q+uh0MedKtX2Y6V7R6aE/5Hwf/2Q==');
+            background-position: center 30%;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle > button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .mytitle > button:hover {
+            border: 2px solid white;
+        }
+
+        .mycomment {
+            color: gray;
+        }
+
+        .mycards {
+            margin: 20px auto 0px auto;
+            width: 95%;
+            max-width: 1200px;
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+
+            display: none;
+        }
+
+        .mybtns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .mybtns > button {
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $('#cards-box').empty()
+            $.ajax({
+                type: 'GET',
+                url: '/movie',
+                data: {},
+                success: function (response) {
+                    let rows = response['movies']
+                    for (let i = 0; i < rows.length; i++) {
+                        let image = rows[i]['image']
+                        let title = rows[i]['title']
+                        let desc = rows[i]['desc']
+                        let star = rows[i]['star']
+                        let comment = rows[i]['comment']
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let temp_html = `<div class="col">
+                                    <div class="card h-100">
+                                        <img src="${image}"
+                                             class="card-img-top">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text">${desc}</p>
+                                            <p>${star_image}</p>
+                                            <p class="mycomment">${comment}</p>
+                                        </div>
+                                    </div>
+                                </div>`
+
+                        $('#cards-box').append(temp_html)
                     }
-                })
-            }
-
-            function get_posts() {
-                $("#post-box").empty()
-                $.ajax({
-                    type: "GET",
-                    url: "/get_posts",
-                    data: {},
-                    success: function (response) {
-                        if (response["result"] == "success") {
-                            let posts = response["posts"]
-                            for (let i = 0; i < posts.length; i++) {
-                                let post = posts[i]
-                                let time_post = new Date(post["date"])
-                                let html_temp = `<div class="box" id="${post["_id"]}">
-                                        <article class="media">
-                                            <div class="media-left">
-                                                <a class="image is-64x64" href="/user/${post['username']}">
-                                                    <img class="is-rounded" src="/static/${post['profile_pic_real']}"
-                                                         alt="Image">
-                                                </a>
-                                            </div>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    <p>
-                                                        <strong>${post['profile_name']}</strong> <small>@${post['username']}</small> <small>${time_post}</small>
-                                                        <br>
-                                                        ${post['comment']}
-                                                    </p>
-                                                </div>
-                                                <nav class="level is-mobile">
-                                                    <div class="level-left">
-                                                        <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post['_id']}', 'heart')">
-                                                            <span class="icon is-small"><i class="fa fa-heart"
-                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">2.7k</span>
-                                                        </a>
-                                                    </div>
-
-                                                </nav>
-                                            </div>
-                                        </article>
-                                    </div>`
-                                $("#post-box").append(html_temp)
-                            }
-                        }
-                    }
-                })
-            }
-
-            $(document).ready(function () {
-                get_posts()
+                }
             })
-        </script>
+        }
 
-    </head>
-    <body>
-    <nav class="navbar is-fixed-top is-white" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="{{ url_for('static', filename='logo.png') }}">
-                <strong class="is-sparta"
-                        style="font-family: 'Stylish', sans-serif;font-size: larger;">SWEETER</strong>
-            </a>
-        </div>
-    </nav>
-    <section class="section">
-    <article class="media">
-        <figure class="media-left" style="align-self: center">
-            <a class="image is-32x32" href="/user/{{ user_info.username }}">
-                <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
-            </a>
-        </figure>
-        <div class="media-content">
-            <div class="field">
-                <p class="control">
-	                  <input id="input-post" class="input is-rounded" placeholder="무슨 생각을 하고 계신가요?"
-	                         onclick='$("#modal-post").addClass("is-active")'>                </p>
-            </div>
-        </div>
-    </article>
-        <div class="modal" id="modal-post">
-            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
-            <div class="modal-content">
-                <div class="box">
-                    <article class="media">
-                        <div class="media-content">
-                            <div class="field">
-                                <p class="control">
-                                        <textarea id="textarea-post" class="textarea"
-                                                  placeholder="무슨 생각을 하고 계신가요?"></textarea>
-                                </p>
-                            </div>
-                            <nav class="level is-mobile">
-                                <div class="level-left">
+        function posting() {
+            let url = $('#url').val()
+            let star = $('#star').val()
+            let comment = $('#comment').val()
 
-                                </div>
-                                <div class="level-right">
-                                    <div class="level-item">
-                                        <a class="button is-sparta" onclick="post()">포스팅하기</a>
-                                    </div>
-                                    <div class="level-item">
-                                        <a class="button is-sparta is-outlined"
-                                           onclick='$("#modal-post").removeClass("is-active")'>취소</a>
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <button class="modal-close is-large" aria-label="close"
-                    onclick='$("#modal-post").removeClass("is-active")'></button>
-        </div>
-</section>
-    <section class="section">
-    <div id="post-box" class="container">
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <a class="image is-64x64" href="#">
-                        <img class="is-rounded"
-                             src={{ url_for("static", filename="profile_pics/profile_placeholder.png") }} alt="Image">
-                    </a>
-                </div>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>홍길동</strong> <small>@username</small> <small>10분 전</small>
-                            <br>
-                            글을 적는 칸
-                        </p>
-                    </div>
-                    <nav class="level is-mobile">
-                        <div class="level-left">
-                            <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('', 'heart')">
-                                <span class="icon is-small"><i class="fa fa-heart" aria-hidden="true"></i></span>&nbsp;<span class="like-num">2.7k</span>
-                            </a>
-                        </div>
+            $.ajax({
+                type: 'POST',
+                url: '/movie',
+                data: {url_give: url, star_give: star, comment_give: comment},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
 
-                    </nav>
-                </div>
-            </article>
-        </div>
+        function open_box() {
+            $('#post-box').show()
+        }
+
+        function close_box() {
+            $('#post-box').hide()
+        }
+
+
+    </script>
+</head>
+
+<body>
+<div class="mytitle">
+    <h1>토트넘조아</h1>
+    <button onclick="open_box()">토트넘 기사 공유하기</button>
+</div>
+<div class="mypost" id="post-box">
+    <div class="form-floating mb-3">
+        <input id="url" type="email" class="form-control" placeholder="name@example.com">
+        <label>기사URL</label>
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+    <div class="form-floating">
+        <textarea id="comment" class="form-control" placeholder="Leave a comment here"></textarea>
+        <label for="floatingTextarea2">코멘트</label>
+    </div>
+    <div class="mybtns">
+        <button onclick="posting()" type="button" class="btn btn-dark">공유하기</button>
+        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+    </div>
+</div>
+<div class="mycards">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+
 
     </div>
-</section>
-    </body>
+</div>
+</div>
+</body>
+
 </html>
