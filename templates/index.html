@@ -103,15 +103,19 @@
                 success: function (response) {
                     let rows = response['movies']
                     for (let i = 0; i < rows.length; i++) {
+                        let url = rows[i]['url']
                         let image = rows[i]['image']
                         let title = rows[i]['title']
                         let desc = rows[i]['desc']
                         let star = rows[i]['star']
                         let comment = rows[i]['comment']
+                        let like = rows[i]['like']
+                        let num = rows[i]['num']
+
 
                         let star_image = '⭐'.repeat(star)
 
-                        let temp_html = `<div class="col">
+                        let temp_html =`<div class="col">
                                     <div class="card h-100">
                                         <img src="${image}"
                                              class="card-img-top">
@@ -120,10 +124,14 @@
                                             <p class="card-text">${desc}</p>
                                             <p>${star_image}</p>
                                             <p class="mycomment">${comment}</p>
+                                            <button onclick="like(${num})">좋아요👍${like}</button>
+                                            <button onclick="del(${num})">삭제하기</button>
+                                            <div>
+                                                <a href="${url}"> 기사 본문으로 가기 </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>`
-
                         $('#cards-box').append(temp_html)
                     }
                 }
@@ -158,6 +166,41 @@
             $('mytoken', {path: '/'}).removeCookie;
             alert('로그아웃!')
             window.location.href = "/login"
+        }
+
+        function like(num) {
+            $.ajax({
+                type: 'POST',
+                url: '/movie/num',
+                data: {num_give:num},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+        function del(num) {
+            $.ajax({
+                type: 'POST',
+                url: '/movie/del',
+                data: {num_give:num},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function nolike(num) {
+            $.ajax({
+                type: 'POST',
+                url: '/movie/no',
+                data: {num_give:num},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
         }
 
 
