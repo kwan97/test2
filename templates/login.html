@@ -19,38 +19,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <style>
         body {
-            background-color: RGBA(232, 52, 78, 0.2);
-            min-height: 100vh;
-        }
+            background-image:url(../static/i13989899935.jpeg);
+            background-position:no-repeat;
+            background-repeat: no-repeat;
+            background-size: cover;
 
-        .section {
+            min-height: 110vh;
+        }
+        .section-top{
             padding: 1rem 1.5rem;
             max-width: 750px;
             margin: auto;
         }
+        .title-h1{
 
-        .title {
-            font-weight: 800;
-            font-size: 5rem;
+            z-index: 999;
         }
 
-        .subtitle {
+        .section-top {
+            opacity:0.1;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-y: 35%;
+        }
+         .section-bottom {
+
+            background-image: url();
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-y: 35%;
+
+        }
+
+        .title.title-h1 {
+            font-weight: 800;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .subtitle.subtitle-h3 {
+
             font-size: 2rem;
+            color: white !important;
         }
 
         .is-sparta {
             color: #e8344e !important;
         }
         .button.is-sparta {
-    background-color: #e8344e;
+    background-color: blue;
     border-color: transparent;
     color: #fff !important;
 }
 
 .button.is-sparta.is-outlined {
-    background-color: transparent;
-    border-color: #e8344e;
-    color: #e8344e !important;
+    background-color: blue;
+    border-color: white;
+    color: white;
 }
 
 .help {
@@ -211,13 +236,12 @@
 
     </head>
     <body>
-    <section class="hero is-white">
+    <section class="hero is-white section-top">
         <div class="hero-body has-text-centered" style="padding-bottom:1rem;margin:auto;">
-            <h1 class="title is-sparta">SWEETER</h1>
-            <h3 class="subtitle is-sparta">세상을 달달하게</h3>
+
         </div>
     </section>
-    <section class="section">
+    <section class="section-bottom">
         <div class="container">
             <div class="box" style="max-width: 480px;margin:auto">
                 <article class="media">

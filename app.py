@@ -1,6 +1,8 @@
 import jwt
 import datetime
 import hashlib
+import requests
+from bs4 import BeautifulSoup
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
@@ -116,13 +118,20 @@ def movie_post():
     image = soup.select_one('meta[property="og:image"]')['content']
     desc = soup.select_one('meta[property="og:description"]')['content']
 
-    doc = {
+    db.moviesforcount.insert_one({'reason':'for count'})
 
+    count_list = list(db.moviesforcount.find({}, {'_id': False}))
+    count = len(count_list)+1
+
+    doc = {
+        'url': url_receive,
         'title':title,
         'image':image,
         'desc':desc,
         'star':star_receive,
-        'comment':comment_receive
+        'comment':comment_receive,
+        'num': count,
+        'like': 0,
 
     }
     db.movies.insert_one(doc)
@@ -133,6 +142,26 @@ def movie_post():
 def movie_get():
     movie_list = list(db.movies.find({},{'_id':False}))
     return jsonify({'movies':movie_list})
+
+@app.route("/movie/num", methods=["post"])
+def movie_num():
+    num_receive = request.form['num_give']
+    db.movies.update_one({'num': int(num_receive)}, {'$inc': {'like': 1}})
+    db.movies.update_one({'num': int(num_receive)}, {'$set': {'likedone': 1}})
+
+    return jsonify({'msg':'좋아요!'})
+
+@app.route("/movie/del", methods=["post"])
+def movie_del():
+    num_receive = request.form['num_give']
+
+    db.movies.delete_one({'num': int(num_receive)})
+
+    return jsonify({'msg':'삭제완료!'})
+
+
+
+    return jsonify({'msg':'좋아요 취소'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
