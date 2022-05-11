@@ -146,7 +146,6 @@ def movie_get():
 def movie_num():
     num_receive = request.form['num_give']
     db.movies.update_one({'num': int(num_receive)}, {'$inc': {'like': 1}})
-    db.movies.update_one({'num': int(num_receive)}, {'$set': {'likedone': 1}})
 
     return jsonify({'msg':'좋아요!'})
 
