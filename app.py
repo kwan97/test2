@@ -48,10 +48,7 @@ def sign_up():
     doc = {
         "username": username_receive,                               # 아이디
         "password": password_hash,                                  # 비밀번호
-        "profile_name": username_receive,                           # 프로필 이름 기본값은 아이디
-        "profile_pic": "",                                          # 프로필 사진 파일 이름
-        "profile_pic_real": "profile_pics/profile_placeholder.png", # 프로필 사진 기본 이미지
-        "profile_info": ""                                          # 프로필 한 마디
+      
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -90,16 +87,6 @@ def check_dup():
     return jsonify({'result': 'success', 'exists': exists})
 
 
-@app.route('/update_profile', methods=['POST'])
-def save_img():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        # 프로필 업데이트
-        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("home"))
-
 
 @app.route("/movie", methods=["POST"])
 def movie_post():
@@ -135,7 +122,7 @@ def movie_post():
     }
     db.movies.insert_one(doc)
 
-    return jsonify({'msg':'저장 완료!'})
+    return jsonify({'msg':'공유 성공!'})
 
 @app.route("/movie", methods=["GET"])
 def movie_get():
